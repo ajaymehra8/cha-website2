@@ -15,7 +15,7 @@ const app=express();
 app.use(express.json());// BY use of this middleware we can use req.body
 // CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your frontend domain
+    origin: 'https://cha-website2-4m8h.vercel.app', // Replace with your frontend domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
   };
@@ -37,7 +37,7 @@ const server=app.listen(process.env.PORT,()=>{
 const io=require('socket.io')(server,{
   pingTimeout:60000,
   cors:{
-    origin:"http://localhost:3000"
+    origin:"https://cha-website2-4m8h.vercel.app"
   }
 });
 io.on("connection",(socket)=>{
