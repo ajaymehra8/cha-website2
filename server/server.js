@@ -1,31 +1,30 @@
-require("dotenv").config();// we can use env variables by using this
-const express=require("express");
-const cors=require("cors");
-const db=require("./config/db");
-const {notFound,errorHandler} =require("./middlewares/errorMiddleware");
-const messageRouter=require("./routers/messageRouter");
-
-const chatRouter=require("./routers/chatRouter");
-const userRouter=require("./routers/userRouter");
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const db = require("./config/db");
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
+const messageRouter = require("./routers/messageRouter");
+const chatRouter = require("./routers/chatRouter");
+const userRouter = require("./routers/userRouter");
 
 db();
 
+const app = express();
+app.use(express.json());
 
-const app=express();
-app.use(express.json());// BY use of this middleware we can use req.body
 // CORS configuration
 const corsOptions = {
-    origin: 'https://cha-website2-4m8h.vercel.app', // Replace with your frontend domain
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  };
-  
-  // Enable CORS with the specified options
-  app.use(cors(corsOptions));
-app.use("/api/v1/chat",chatRouter);
-app.use("/api/v1/user",userRouter);
-app.use("/api/v1/message",messageRouter);
+  origin: 'https://cha-website2-4m8h.vercel.app', // Replace with your frontend domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
+// Enable CORS with the specified options
+app.use(cors(corsOptions));
+
+app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/message", messageRouter);
 
 app.use(notFound);
 app.use(errorHandler);
@@ -38,7 +37,8 @@ const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
     origin: "https://cha-website2-4m8h.vercel.app",
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST"],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }
 });
 
