@@ -41,7 +41,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   }
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT,{
+      cert:process.env.NODE_ENV==='production'?process.env.SSL_CERT:'',
+      key:process.env.NODE_ENV==='production'?process.env.SSL_KEY:'',
+      path:'/socket',
+      transports:['websocket','polling'],
+      reconnection:true,
+      reconnectionAttempts:5,
+    });
     socket.emit("setup", user);
     socket.on("connected", () => {
       setSocketConnected(true);

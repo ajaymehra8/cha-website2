@@ -39,9 +39,13 @@ const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
     origin: "https://cha-website2-hdot.vercel.app",
+    path:'/socket',
+    wssEngine:['ws','wss'],
+    transports:['websocket','polling'],
     methods: ["GET", "POST"],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials:true
+    credentials:true,
+    allowEIOS:true
   }
 });
 
