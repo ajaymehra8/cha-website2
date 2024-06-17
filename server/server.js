@@ -82,7 +82,7 @@ io.on("connection", (socket) => {
         return;
       } else {
         console.log(`Emitting message to user ${user._id}`);
-        socket.to(user._id).emit('message received', newMessageReceived);
+        socket.in(user._id).emit('message received', newMessageReceived);
       }
     });
   });
