@@ -17,6 +17,7 @@ const corsOptions = {
   origin: 'https://cha-website2-4m8h.vercel.app', // Replace with your frontend domain
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials:true
 };
 
 // Enable CORS with the specified options
@@ -38,7 +39,8 @@ const io = require('socket.io')(server, {
   cors: {
     origin: "https://cha-website2-4m8h.vercel.app",
     methods: ["GET", "POST"],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials:true
   }
 });
 
@@ -86,5 +88,9 @@ io.on("connection", (socket) => {
 
   socket.on('error', (error) => {
     console.error("Socket encountered error: ", error);
+  });
+
+  socket.on('connect_error', (error) => {
+    console.error("Socket connection error: ", error);
   });
 });
