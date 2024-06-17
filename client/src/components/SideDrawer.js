@@ -17,8 +17,9 @@ import { ChatState } from "../Context/ChatProvider";
 import ProfileModel from "./ProfileModel";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import NotificationBadge from "react-notification-badge";
-import { Effect } from "react-notification-badge";import {
+// import NotificationBadge from "react-notification-badge";
+// import { Effect } from "react-notification-badge";
+import {
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -148,10 +149,10 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
-              <NotificationBadge
+              {/* <NotificationBadge
               count={notification.length}
               effect={Effect.SCALE}
-              />
+              /> */}
               <i
                 className="bi bi-bell-fill"
                 style={{ fontSize: "20px", margin: "1px" }}
