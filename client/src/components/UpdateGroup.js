@@ -195,7 +195,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
       <IconButton
         onClick={onOpen}
         display={{ base: "flex" }}
-        icon={<i class="bi bi-eye"></i>}
+        icon={<i className="bi bi-eye"></i>}
       >
         Open Modal
       </IconButton>

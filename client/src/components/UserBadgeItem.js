@@ -17,7 +17,7 @@ const UserBadgeItem = ({ user, handleFunction }) => {
     >
       {user.name.toUpperCase()}
       <IconButton
-        icon={<i class="bi bi-x"></i>}
+        icon={<i className="bi bi-x"></i>}
         background={"purple"}
         color={"white"}
         onClick={handleFunction}

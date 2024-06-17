@@ -66,7 +66,7 @@ useEffect(()=>{
           <Button
             display={"flex"}
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-            rightIcon={<i class="bi bi-plus-lg"></i>}
+            rightIcon={<i className="bi bi-plus-lg"></i>}
           >
             New Group Chat
           </Button>

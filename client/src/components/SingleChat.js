@@ -185,7 +185,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           >
             <IconButton
               display={{ base: "flex", md: "none" }}
-              icon={<i class="bi bi-arrow-left"></i>}
+              icon={<i className="bi bi-arrow-left"></i>}
               onClick={() => {
                 setSelctedChat("");
               }}

@@ -18,7 +18,7 @@ const ProfileModel = ({user,children}) => {
   return (
     <div>
       {children?<span onClick={onOpen}>{children}</span>:(
-        <IconButton display={{base:'flex'}} icon={<i class="bi bi-eye"></i>} onClick={onOpen}/>
+        <IconButton display={{base:'flex'}} icon={<i className="bi bi-eye"></i>} onClick={onOpen}/>
       )}
        <Modal isOpen={isOpen} onClose={onClose} size={'lg'} isCentered>
         <ModalOverlay />
