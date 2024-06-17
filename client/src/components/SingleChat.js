@@ -19,7 +19,7 @@ import UpdateGroup from "./UpdateGroup";
 import animationData from '../animations/typing.json';
 import "./style.css";
 
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://cha-website2.vercel.app";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -62,7 +62,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:8000/api/v1/message/${selectedChat._id}`,
+        `https://cha-website2.vercel.app/api/v1/message/${selectedChat._id}`,
         config
       );
       setMessages(data.messages);
@@ -129,7 +129,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
 
         const { data } = await axios.post(
-          "http://localhost:8000/api/v1/message",
+          "https://cha-website2.vercel.app/api/v1/message",
           {
             message: newMessage,
             chatId: selectedChat._id,

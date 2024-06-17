@@ -13,7 +13,7 @@ app.use(express.json());
 
 // CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend domain
+  origin: 'https://cha-website2-hdot.vercel.app', // Replace with your frontend domain
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials:true
@@ -38,7 +38,7 @@ const server = app.listen(process.env.PORT, () => {
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://cha-website2-hdot.vercel.app",
     methods: ["GET", "POST"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials:true
