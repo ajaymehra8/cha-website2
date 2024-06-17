@@ -26,7 +26,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState();
-  const { user, selectedChat, setSelctedChat } = ChatState();
+  const { user, selectedChat, setSelctedChat,notification,setNotification } = ChatState();
   const [socketConnected, setSocketConnected] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const toast = useToast();
@@ -95,6 +95,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       ) {
         // Handle notification
         console.log("New message for a different chat:", newMessageReceived);
+        if(!notification.includes(newMessageReceived)){
+          setNotification([newMessageReceived,...notification]);
+          setFetchAgain(!fetchAgain);
+        }
+
       } else {
         console.log("New message for the current chat,:", newMessageReceived);
         setMessages((prevMessages) => [...prevMessages, newMessageReceived]);

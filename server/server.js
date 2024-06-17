@@ -6,7 +6,7 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const messageRouter = require("./routers/messageRouter");
 const chatRouter = require("./routers/chatRouter");
 const userRouter = require("./routers/userRouter");
-
+const path=require("path");
 db();
 
 const app = express();
@@ -19,6 +19,22 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials:true
 };
+// ------------- DEPLOYMENT-----------------
+
+const __dirname1=path.resolve();
+
+if(process.env.NODE_ENV==='production'){
+app.use(express.static(path.join(__dirname1,"/client/build")));
+app.get("*",(req,res)=>{
+  res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
+})
+}else{
+  app.get("/",(req,res)=>{
+    res.send("Api is running successfully");
+  })
+}
+
+// ------------- DEPLOYMENT-----------------
 
 // Enable CORS with the specified options
 app.use(cors(corsOptions));
