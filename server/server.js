@@ -30,58 +30,61 @@ app.use("/api/v1/message",messageRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const server=app.listen(process.env.PORT,()=>{
-    console.log(`App is listening at ${process.env.PORT}`);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`App is listening at ${process.env.PORT}`);
 });
 
-const io=require('socket.io')(server,{
-  pingTimeout:60000,
-  cors:{
-    origin:"https://cha-website2-4m8h.vercel.app"
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "https://cha-website2-4m8h.vercel.app",
+    methods: ["GET", "POST"]
   }
 });
-io.on("connection",(socket)=>{
-console.log('connected to socket.io');
 
-socket.on('setup',(userData)=>{
-socket.join(userData._id);
-socket.emit('connected');
-});
+io.on("connection", (socket) => {
+  console.log('connected to socket.io');
 
-socket.on('join chat',(room)=>{
-socket.join(room);
-console.log(" user join romm "+ room)
-});
+  socket.on('setup', (userData) => {
+    socket.join(userData._id);
+    socket.emit('connected');
+  });
 
-socket.on('typing',(room)=>{
-  socket.in(room).emit("typing");
-})
-socket.on('stop typing',(room)=>{
-  socket.in(room).emit("stop typing");
-})
+  socket.on('join chat', (room) => {
+    socket.join(room);
+    console.log("User joined room " + room);
+  });
 
-socket.on('new message',(newMessageReceived)=>{
-var chat=newMessageReceived.chat;
+  socket.on('typing', (room) => {
+    socket.to(room).emit("typing");
+  });
 
-if(!chat.users){
-  return console.log("chat.users not defined");
-}
-console.log(chat.users);
-chat.users.forEach(user=>{
-  if(user._id===newMessageReceived.sender._id){
-    return;
-  }else{
-    console.log(`Emitting message to user ${user}`);
+  socket.on('stop typing', (room) => {
+    socket.to(room).emit("stop typing");
+  });
 
-    socket.to(user).emit('message received',newMessageReceived);
+  socket.on('new message', (newMessageReceived) => {
+    const chat = newMessageReceived.chat;
 
-  }
-})
-});
+    if (!chat.users) {
+      return console.error("chat.users not defined");
+    }
 
-socket.off("setup",()=>{
-  console.log("user disconnected");
-  socket.leave(userData._id);
-})
+    chat.users.forEach(user => {
+      if (user._id === newMessageReceived.sender._id) {
+        return;
+      } else {
+        console.log(`Emitting message to user ${user._id}`);
+        socket.to(user._id).emit('message received', newMessageReceived);
+      }
+    });
+  });
 
+  socket.on('disconnect', () => {
+    console.log("user disconnected");
+  });
+
+  socket.on('error', (error) => {
+    console.error("Socket encountered error: ", error);
+  });
 });
