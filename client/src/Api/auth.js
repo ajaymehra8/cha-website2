@@ -10,7 +10,7 @@ if(pic){
 
 }
 
-const {data}=await axios.post(`https://cha-website2.vercel.app/api/v1/user/signup`,form);
+const {data}=await axios.post(`http://localhost:8000/api/v1/user/signup`,form);
 
 return data;
 }
@@ -20,7 +20,7 @@ export const loginApi=async(email,password)=>{
     console.log(email, password);
     form.append('email', email);
     form.append('password', password);
-     const {data}=await axios.post(`https://cha-website2.vercel.app/api/v1/user/login`,form);
+     const {data}=await axios.post(`http://localhost:8000/api/v1/user/login`,form);
     
     return data;
     }
