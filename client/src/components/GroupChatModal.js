@@ -39,7 +39,7 @@ const config = {
       Authorization: `Bearer ${user.jwt}`,
     },
   };
-  const {data}=await axios.get(`http://localhost:8000/api/v1/user?search=${search}`,config);
+  const {data}=await axios.get(`https://cha-website2.vercel.app/api/v1/user?search=${search}`,config);
 
 setLoading(false);
 setSearchResults(data.users);
@@ -74,7 +74,7 @@ try{
           Authorization: `Bearer ${user.jwt}`,
         },
       };
-      const {data}=await axios.post("http://localhost:8000/api/v1/chat/group",{
+      const {data}=await axios.post("https://cha-website2.vercel.app/api/v1/chat/group",{
         name:groupChatName,
         users:JSON.stringify(selectedUsers.map(u=>(
             u._id
