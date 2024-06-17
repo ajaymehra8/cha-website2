@@ -28,7 +28,9 @@ app.use("/api/v1/message", messageRouter);
 
 app.use(notFound);
 app.use(errorHandler);
-
+app.get("/",(req,res)=>{
+  res.send("working");
+})
 const server = app.listen(process.env.PORT, () => {
   console.log(`App is listening at ${process.env.PORT}`);
 });
