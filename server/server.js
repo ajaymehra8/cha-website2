@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
     socket.join(room);
     console.log("User joined room " + room);
   });
-
+  
   socket.on('typing', (room) => {
     socket.to(room).emit("typing");
   });
@@ -78,11 +78,11 @@ io.on("connection", (socket) => {
     }
 
     chat.users.forEach(user => {
-      if (user._id === newMessageReceived.sender._id) {
+      if (user === newMessageReceived.sender._id) {
         return;
       } else {
-        console.log(`Emitting message to user ${user._id}`);
-        socket.in(user._id).emit('message received', newMessageReceived);
+        console.log(`Emitting message to user ${user}`);
+        socket.in(user).emit('message received', newMessageReceived);
       }
     });
   });
@@ -94,6 +94,7 @@ io.on("connection", (socket) => {
   socket.on('error', (error) => {
     console.error("Socket encountered error: ", error);
   });
+
 
   socket.on('connect_error', (error) => {
     console.error("Socket connection error: ", error);

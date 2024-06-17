@@ -19,7 +19,7 @@ import UpdateGroup from "./UpdateGroup";
 import animationData from '../animations/typing.json';
 import "./style.css";
 
-const ENDPOINT = "https://cha-website2.vercel.app";
+const ENDPOINT = "http://localhost:8000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -55,6 +55,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     });
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
+
+  
+
   }, []);
 
   const fetchMessages = async () => {
@@ -69,7 +72,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `https://cha-website2.vercel.app/api/v1/message/${selectedChat._id}`,
+        `http://localhost:8000/api/v1/message/${selectedChat._id}`,
         config
       );
       setMessages(data.messages);
@@ -136,7 +139,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
 
         const { data } = await axios.post(
-          "https://cha-website2.vercel.app/api/v1/message",
+          "http://localhost:8000/api/v1/message",
           {
             message: newMessage,
             chatId: selectedChat._id,

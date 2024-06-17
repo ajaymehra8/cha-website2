@@ -47,7 +47,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.patch(
-        "https://cha-website2.vercel.app/api/v1/chat/rename-group",
+        "http://localhost:8000/api/v1/chat/rename-group",
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -90,7 +90,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
           },
         };
         const { data } = await axios.patch(
-          `https://cha-website2.vercel.app/api/v1/chat/remove-someone`,
+          `http://localhost:8000/api/v1/chat/remove-someone`,
           { chatId: selectedChat._id, userId: user1._id },
           config
         );
@@ -140,7 +140,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.patch(
-        `https://cha-website2.vercel.app/api/v1/chat/add-to-group`,
+        `http://localhost:8000/api/v1/chat/add-to-group`,
         { chatId: selectedChat._id, userId: user1._id },
         config
       );
@@ -173,7 +173,7 @@ const UpdateGroup = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
         },
       };
       const { data } = await axios.get(
-        `https://cha-website2.vercel.app/api/v1/user?search=${search}`,
+        `http://localhost:8000/api/v1/user?search=${search}`,
         config
       );
 

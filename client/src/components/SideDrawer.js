@@ -58,7 +58,7 @@ const SideDrawer = () => {
         },
       };
       const { data } = await axios.post(
-        "https://cha-website2.vercel.app/api/v1/chat",
+        "http://localhost:8000/api/v1/chat",
         { userId },
         config
       );
@@ -98,7 +98,7 @@ const SideDrawer = () => {
         },
       };
       const { data } = await axios.get(
-        `https://cha-website2.vercel.app/api/v1/user?search=${search}`,
+        `http://localhost:8000/api/v1/user?search=${search}`,
         config
       );
 
